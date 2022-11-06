@@ -2,6 +2,7 @@
 
 namespace App\Api\Controller\v1;
 
+use app\api\validate\TestValidate;
 use think\Validate;
 
 class Banner
@@ -14,6 +15,19 @@ class Banner
      */
     public function getBanner($id)
     {
+        $data = [
+            'name' => 'test',
+            'email' => '1@test.com'
+        ];
 
+        /*$validate = new Validate([
+            'name' => 'require|max:10',
+            'email' => 'email'
+        ]);*/
+
+        $validate = new TestValidate();
+
+        $result = $validate->batch()->check($data);
+        var_dump($result);
     }
 }
