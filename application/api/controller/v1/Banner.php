@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Controller\v1;
+namespace app\api\controller\v1;
 
 use app\api\validate\IDMustBePositiveInt;
 use app\api\validate\TestValidate;
