@@ -3,8 +3,8 @@
 namespace app\api\controller\v1;
 
 use app\api\validate\IDMustBePositiveInt;
-use app\api\validate\TestValidate;
-use think\Validate;
+use app\api\model\Banner as BannerModel;
+use think\Exception;
 
 class Banner
 {
@@ -18,24 +18,8 @@ class Banner
     {
         (new IDMustBePositiveInt())->goCheck();
 
-        /*$data = [
-            'id' => $id
-        ];
+        $banner = BannerModel::getBannerByID($id);
 
-        $validate = new Validate([
-            'name' => 'require|max:10',
-            'email' => 'email'
-        ]);
-
-        $validate = new IDMustBePositiveInt();
-
-        $result = $validate->batch()->check($data);
-
-        if ($result){
-
-        }else{
-
-        };*/
-
+        return $banner;
     }
 }
