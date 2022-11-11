@@ -2,7 +2,7 @@
 
 namespace app\lib\exception;
 
-use think\Exception;
+use Exception;
 use think\exception\Handle;
 
 class ExceptionHandler extends Handle
