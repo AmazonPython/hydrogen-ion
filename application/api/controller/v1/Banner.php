@@ -23,7 +23,7 @@ class Banner
 
         if (!$banner){
             throw new BannerMissException([
-                'msg' => '请求参数不存在',
+                'msg' => '请求banner不存在',
                 'errorCode' => 40000
             ]);
         }

@@ -22,6 +22,10 @@ class ExceptionHandler extends Handle
             $this->msg = $e->msg;
             $this->errorCode = $e->errorCode;
         }else{
+            if (config('app_debug')){
+                return parent::render($e);
+            }
+
             $this->code = 500;
             $this->msg = '服务器内部错误';
             $this->errorCode = 999;
@@ -31,7 +35,7 @@ class ExceptionHandler extends Handle
         $request = Request::instance();
 
         $result = [
-            'code' => $this->code,
+            'errorCode' => $this->errorCode,
             'msg' => $this->msg,
             'request_url' => $request->url()
         ];
