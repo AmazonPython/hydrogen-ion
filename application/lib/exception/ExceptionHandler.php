@@ -3,7 +3,7 @@
 namespace app\lib\exception;
 
 use Exception;
-
+use think\Env;
 use think\exception\Handle;
 use think\exception\HttpException;
 use think\Log;
@@ -23,8 +23,8 @@ class ExceptionHandler extends Handle
             $this->code = $e->code;
             $this->msg = $e->msg;
             $this->errorCode = $e->errorCode;
-        } elseif ($e instanceof HttpException) {
-            $this->code = 500;
+        } elseif ($e instanceof HttpException && Env::get('app_debug') == false) {
+            $this->code = 404;
             $this->errorCode = 999;
             $this->msg = '请求的地址不存在';
         } else {
