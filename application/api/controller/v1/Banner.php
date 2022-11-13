@@ -22,11 +22,8 @@ class Banner
         $banner = BannerModel::getBannerByID($id);
 
         if (!$banner){
-            throw new BannerMissException([
-                'msg' => '请求banner不存在',
-                'errorCode' => 40000
-            ]);
+            throw new BannerMissException();
         }
-        return $banner;
+        return json($banner);
     }
 }

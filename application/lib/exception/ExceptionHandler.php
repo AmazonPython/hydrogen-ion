@@ -3,7 +3,9 @@
 namespace app\lib\exception;
 
 use Exception;
+
 use think\exception\Handle;
+use think\exception\HttpException;
 use think\Log;
 use think\Request;
 
@@ -16,12 +18,16 @@ class ExceptionHandler extends Handle
     // 需要返回客户端请求的 URL 路径
     public function render(Exception $e)
     {
-        if ($e instanceof BaseException){
+        if ($e instanceof BaseException) {
             // 如果是自定义的异常
             $this->code = $e->code;
             $this->msg = $e->msg;
             $this->errorCode = $e->errorCode;
-        }else{
+        } elseif ($e instanceof HttpException) {
+            $this->code = 500;
+            $this->errorCode = 999;
+            $this->msg = '请求的地址不存在';
+        } else {
             if (config('app_debug')){
                 return parent::render($e);
             }
