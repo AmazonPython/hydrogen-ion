@@ -2,20 +2,12 @@
 
 namespace app\api\model;
 
-use think\Model;
-
-class Image extends Model
+class Image extends BaseModel
 {
     protected $hidden = ['id', 'from', 'delete_time'];
 
     public function getUrlAttr($value, $data)
     {
-        $finalUrl = $value;
-
-        if ($data['from'] == 1) {
-            $finalUrl = config('setting.img_prefix') . $value;
-        }
-
-        return $finalUrl;
+        return $this->prefixImageUrl($value, $data);
     }
 }

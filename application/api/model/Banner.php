@@ -2,9 +2,7 @@
 
 namespace app\api\model;
 
-use think\Model;
-
-class Banner extends Model
+class Banner extends BaseModel
 {
     public function items()
     {
