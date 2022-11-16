@@ -23,4 +23,9 @@ class Product extends BaseModel
     {
         return Product::limit($count)->order('create_time','desc')->select();
     }
+
+    public static function getProductsByCategoryID($categoryID)
+    {
+        return Product::where('category_id', $categoryID)->select();
+    }
 }
