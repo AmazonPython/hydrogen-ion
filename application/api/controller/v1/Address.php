@@ -4,7 +4,7 @@ namespace app\api\controller\v1;
 
 use app\api\model\User as UserModel;
 use app\api\validate\AddressNew;
-use app\api\service\token as TokenService;
+use app\api\service\Token as TokenService;
 use app\lib\enum\ScopeEnum;
 use app\lib\exception\ForbiddenException;
 use app\lib\exception\SuccessMessage;
@@ -44,13 +44,13 @@ class Address extends Controller
             throw new UserException();
         }
 
-        $dataArray = getDataByRule(input('post.'));
+        $data = $validate->getDataByRule(input('post.'));
         $userAddress = $user->address;
 
         if (!$userAddress) {
-            $user->Address()->save($dataArray);
+            $user->Address()->save($data);
         } else {
-            $user->Address->save($dataArray);
+            $user->Address->save($data);
         }
 
         return json(new SuccessMessage(),201);

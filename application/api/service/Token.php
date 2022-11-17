@@ -22,7 +22,7 @@ class Token
 
     public static function getCurrentTokenVar($key)
     {
-        $token = Request::instance() ->header('token');
+        $token = Request::instance()->header('token');
         $vars = Cache::get($token);
 
         if (!$vars) {
