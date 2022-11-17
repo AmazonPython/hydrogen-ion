@@ -2,6 +2,7 @@
 
 namespace app\api\service;
 
+use app\lib\enum\ScopeEnum;
 use app\lib\exception\ParameterException;
 use app\lib\exception\TokenException;
 use Exception;
@@ -44,7 +45,7 @@ class Token
         $uid = self::getCurrentTokenVar('uid');
         $scope = self::getCurrentTokenVar('scope');
 
-        if ($scope == ScopeEnum::Super) {
+        if ($scope == ScopeEnum::SuperUser) {
             // 只有 Super 权限才可以自己传入 uid，且必须在 get 参数中，post 不接受任何 uid 字段
             $userID = input('get.uid');
 

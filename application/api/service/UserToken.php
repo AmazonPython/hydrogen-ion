@@ -3,6 +3,7 @@
 namespace app\api\service;
 
 use app\api\model\User;
+use app\lib\enum\ScopeEnum;
 use app\lib\exception\TokenException;
 use app\lib\exception\WeChatException;
 use think\Exception;
@@ -60,9 +61,9 @@ class UserToken extends Token
             $uid = $this->newUser($openId);
         }
 
-        $cacheHedValue = $this->prePareCacheValue($result, $uid);
+        $cachedValue = $this->prePareCacheValue($result, $uid);
 
-        return $this->saveToCache($cacheHedValue);
+        return $this->saveToCache($cachedValue);
     }
 
     private function newUser($openId)
@@ -74,17 +75,17 @@ class UserToken extends Token
 
     private function prePareCacheValue($result, $uid)
     {
-        $cacheHedValue = $result;
-        $cacheHedValue = $uid;
-        $cacheHedValue['scope'] = 16;
+        $cachedValue = $result;
+        $cachedValue = $uid;
+        $cachedValue['scope'] = ScopeEnum::User;
 
-        return $cacheHedValue;
+        return $cachedValue;
     }
 
-    private function saveToCache($cacheHedValue)
+    private function saveToCache($cachedValue)
     {
         $key = self::generateToken();
-        $value = json_encode($cacheHedValue);
+        $value = json_encode($cachedValue);
         $expire_in = config('setting.token_expire_in');
         $request = cache($key, $value, $expire_in);
 
