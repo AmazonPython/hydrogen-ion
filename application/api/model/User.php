@@ -4,9 +4,12 @@ namespace app\api\model;
 
 class User extends BaseModel
 {
+    public function address()
+    {
+        return $this->hasOne('UserAddress', 'user_id', 'id');
+    }
     public static function getByOpenID($openID)
     {
-        $user = User::where('openid', $openID)->find();
-        return $user;
+        return User::where('openid', $openID)->find();
     }
 }
